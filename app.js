@@ -1,23 +1,26 @@
-window.onscroll = function(ev) {
-  console.log({ 
-    scrollY: window.scrollY,
-    windowHeight: window.innerHeight,
-    offsetHeight: document.body.offsetHeight,
-  })
+const fnScroll = (event) => {
+  // console.log({ 
+  //   scrollY: window.scrollY,
+  //   windowHeight: window.innerHeight,
+  //   offsetHeight: document.body.offsetHeight,
+  // });
   
   const offset = window.innerHeight;
+  const sliderElement = document.getElementById('slider');
+  const isTriggered = document.body.scrollTop > offset 
+    || document.documentElement.scrollTop > offset
 
-  const sliderElement = document.getElementById('slider')
-
-  if (document.body.scrollTop > offset || document.documentElement.scrollTop > offset) {
-    console.log('scroll trigger')
-    sliderElement.classList.remove('hidden')
+  if (isTriggered) {
+    console.log('scroll trigger');
+    sliderElement.classList.remove('slider--hidden');
   }
-
-  // const offsetHeight = document.body.offsetHeight;
-
-  // if ((window.innerHeight + window.scrollY) >= offsetHeight) {
-  //     // alert("you're at the bottom of the page");
-  //     console.log('scroll trigger')
-  // }
 };
+
+const fnToggleShow = (id) => {
+  if (!id) return;
+
+  const element = document.getElementById(id);
+  element.classList.toggle('slider--hidden');
+};
+
+window.onscroll = fnScroll;
