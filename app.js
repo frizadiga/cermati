@@ -1,5 +1,5 @@
 const fnScroll = (event) => {
-  let everClosed = null
+  let everClosed = false
   if (localStorage.slider) {
     everClosed = JSON.parse(localStorage.slider).everClosed;
   }
