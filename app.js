@@ -1,22 +1,20 @@
 const fnScroll = (event) => {
-  // console.log({ 
-  //   scrollY: window.scrollY,
-  //   windowHeight: window.innerHeight,
-  //   offsetHeight: document.body.offsetHeight,
-  // });
+  const getTime = () => {
+    if (localStorage.slider) {
+      return JSON.parse(localStorage.slider).time;
+    } else {
+      fnSetTime();
+    }
+  } 
 
-  const ms = JSON.parse(localStorage.slider).time;
-  const diff = new Date().getTime() - ms;
+  const diff = new Date().getTime() - getTime();
   const mm = Math.floor(diff / 1000 / 60);
-  
-  if (localStorage.slider) {
-    console.log({ ms, mm, diff });
-  }
   
   const offset = window.innerHeight;
   const sliderElement = document.getElementById('slider');
+
   const isTriggered = () => {
-    const intervalInMinute = 1;
+    const intervalInMinute = 10;
     
     return (
       mm >= intervalInMinute && (
@@ -27,7 +25,6 @@ const fnScroll = (event) => {
   }
 
   if (isTriggered()) {
-    console.log('scroll trigger', { isTriggered });
     sliderElement.classList.remove('slider--hidden');
   }
 };
@@ -35,17 +32,26 @@ const fnScroll = (event) => {
 const fnToggleShow = (id) => {
   if (!id) return;
   
-  if (true || !localStorage.slider) {
-    const slider = {
-      everClosed: true,
-      time: new Date().getTime(),
-    }
-
-    localStorage.setItem('slider', JSON.stringify(slider))
-  }
+  fnSetTime()
 
   const element = document.getElementById(id);
   element.classList.toggle('slider--hidden');
 };
 
-window.onscroll = fnScroll;
+const fnSetTime = () => {
+  const slider = {
+    everClosed: true,
+    time: new Date().getTime(),
+  }
+
+  localStorage.setItem('slider', JSON.stringify(slider))
+}
+
+const fnLoad = () => {
+  fnSetTime()
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", fnLoad);
+  document.addEventListener("scroll", fnScroll);
+}
