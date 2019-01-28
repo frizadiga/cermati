@@ -111,7 +111,7 @@ button {
   left: 0;
   background-color: #eaeaea;
   padding: 8px;
-  max-width: 500px;
+  width: 100vw;
   border-radius: 4px;
   box-shadow: 1px 1px 7px 4px #80808057;
   transition: all .3s;
@@ -151,5 +151,8 @@ button {
   }
   .banner .banner__centered-items {
     grid-auto-flow: column;
+  }
+  .slider {
+    width: 50vw;
   }
 }

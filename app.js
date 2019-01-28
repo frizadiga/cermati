@@ -26,13 +26,13 @@ const fnScroll = (event) => {
 const fnCloseSlider = async (id) => {
   if (!id) return;
 
-  const intervalInMinute = 10 * 60 * 1000;
+  const intervalInMinute = (value) => value * 60 * 1000;
 
   const element = document.getElementById(id);
   element.classList.toggle('slider--hidden');
   
   await fnSetEverClosed(true);
-  setTimeout(() => fnSetEverClosed(false), intervalInMinute);
+  setTimeout(() => fnSetEverClosed(false), intervalInMinute(10));
 };
 
 const fnSetEverClosed = (value) => {
