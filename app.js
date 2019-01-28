@@ -1,4 +1,6 @@
 const fnScroll = (event) => {
+
+
   const { everClosed=false } = JSON.parse(localStorage.slider);
   
   const offset = window.innerHeight;
@@ -40,8 +42,8 @@ const fnSetEverClosed = (value) => {
   localStorage.setItem('slider', JSON.stringify(slider));
 }
 
-const fnLoad = () => {
-  fnSetEverClosed(false);
+const fnLoad = async () => {
+  await fnSetEverClosed(false);
 }
 
 document.addEventListener("DOMContentLoaded", fnLoad);
