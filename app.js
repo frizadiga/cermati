@@ -1,54 +1,47 @@
 const fnScroll = (event) => {
-  const getTime = () => {
-    if (localStorage.slider) {
-      return JSON.parse(localStorage.slider).time;
-    } else {
-      fnSetTime();
-    }
-  } 
-
-  const diff = new Date().getTime() - getTime();
-  const mm = Math.floor(diff / 1000 / 60);
+  const { everClosed } = JSON.parse(localStorage.slider) || false;
   
   const offset = window.innerHeight;
   const sliderElement = document.getElementById('slider');
 
   const isTriggered = () => {
-    const intervalInMinute = 10;
-    
     return (
-      mm >= intervalInMinute && (
+        !everClosed && (
         document.body.scrollTop > offset ||
         document.documentElement.scrollTop > offset
       )
     )
   }
 
+  console.log({ everClosed })
+
   if (isTriggered()) {
     sliderElement.classList.remove('slider--hidden');
   }
 };
 
-const fnToggleShow = (id) => {
+const fnCloseSlider = async (id) => {
   if (!id) return;
-  
-  fnSetTime()
+
+  const intervalInMinute = 10 * 60 * 1000;
 
   const element = document.getElementById(id);
   element.classList.toggle('slider--hidden');
+  
+  await fnSetEverClosed(true);
+  setTimeout(() => fnSetEverClosed(false), intervalInMinute);
 };
 
-const fnSetTime = () => {
+const fnSetEverClosed = (value) => {
   const slider = {
-    everClosed: true,
-    time: new Date().getTime(),
+    everClosed: value,
   }
 
-  localStorage.setItem('slider', JSON.stringify(slider))
+  localStorage.setItem('slider', JSON.stringify(slider));
 }
 
 const fnLoad = () => {
-  fnSetTime()
+  fnSetEverClosed(false);
 }
 
 if (document.readyState === "loading") {
