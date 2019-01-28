@@ -1,14 +1,15 @@
 const fnScroll = (event) => {
-
-
-  const { everClosed=false } = JSON.parse(localStorage.slider);
+  let everClosed = null
+  if (localStorage.slider) {
+    everClosed = JSON.parse(localStorage.slider).everClosed;
+  }
   
   const offset = window.innerHeight;
   const sliderElement = document.getElementById('slider');
 
   const isTriggered = () => {
     return (
-        !everClosed && (
+        everClosed === false && (
         document.body.scrollTop > offset ||
         document.documentElement.scrollTop > offset
       )
