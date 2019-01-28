@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "serve -s",
     "dev": "live-server --port=3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,5 +12,8 @@
   "license": "MIT",
   "devDependencies": {
     "live-server": "^1.2.1"
+  },
+  "dependencies": {
+    "serve": "^10.1.1"
   }
 }
