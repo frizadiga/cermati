@@ -1,5 +1,5 @@
 const fnScroll = (event) => {
-  const { everClosed } = JSON.parse(localStorage.slider) || false;
+  const { everClosed=false } = JSON.parse(localStorage.slider);
   
   const offset = window.innerHeight;
   const sliderElement = document.getElementById('slider');
