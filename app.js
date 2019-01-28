@@ -44,8 +44,10 @@ const fnSetEverClosed = (value) => {
 }
 
 const fnLoad = async () => {
+  console.log('fnLoad()')
   await fnSetEverClosed(false);
 }
 
-document.addEventListener("DOMContentLoaded", fnLoad);
+window.addEventListener("load", fnLoad);
+// document.addEventListener("DOMContentLoaded", fnLoad);
 document.addEventListener("scroll", fnScroll);
