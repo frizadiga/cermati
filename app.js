@@ -44,7 +44,5 @@ const fnLoad = () => {
   fnSetEverClosed(false);
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", fnLoad);
-  document.addEventListener("scroll", fnScroll);
-}
+document.addEventListener("DOMContentLoaded", fnLoad);
+document.addEventListener("scroll", fnScroll);
